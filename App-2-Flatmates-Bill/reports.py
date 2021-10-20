@@ -1,5 +1,7 @@
-from fpdf import FPDF
 import webbrowser
+import os
+
+from fpdf import FPDF
 
 class PdfReport:
     """
@@ -38,5 +40,6 @@ class PdfReport:
         pdf.cell(w=150, h=25, txt=flatmate2_pay, border=0, ln=1)
 
         # Saving file
+        os.chdir("reports")
         pdf.output(self.filename)
         webbrowser.open(self.filename)
