@@ -42,63 +42,51 @@ class Canvas:
     def make(self):
         pass 
 
+#############################################
+##      CLI - Command Line Interface       ##
+#############################################
 
-# Test inputs
-width = 100
-height = 100
-color = "white"
-
-# # Creating the canvas
-# width = int(input("What's the width of the canvas in pixels?: "))
-# height = int(input("what's the height of the canvas in pixels?: "))
-# # Making sure the user chooses a right canvas color
-# valid_color = False
-# while valid_color == False:
-#     color = input("Choose a background color for your canvas (black/white): ")
-#     if color == "white" or color == "black":
-#         valid_color = True
+# Creating the canvas
+width = int(input("What's the width of the canvas in pixels?: "))
+height = int(input("what's the height of the canvas in pixels?: "))
+# Making sure the user chooses a right canvas color
+valid_color = False
+while valid_color == False:
+    color = input("Choose a background color for your canvas (black/white): ")
+    if color == "white" or color == "black":
+        valid_color = True
 
 canvas = Canvas(width, height, color)
 
-# Test inputs
-# Square
-square_x = 50
-square_y = 50
-square_side = 20
-color = (100,150,200)
-square = Square(square_x, square_y, square_side, color)
-square.draw(canvas)
+# User drawings
+end_of_program = False
+while end_of_program == False:
+    shape = input ("Choose the shape (square/rectagle) or type quit to fnish drawing: ")
+    if shape == "square":
+        square_x = int(input("Please provide starting x: "))
+        square_y = int(input("Please provide starting y: "))
+        square_side = int(input("Please give me the side length: "))
+        square_red = int(input("How much red (0-255)? "))
+        square_green = int(input("How much green (0-255)? "))
+        square_blue = int(input("How much blue (0-255)? "))
+        color = (square_red, square_green, square_blue)
+        square = Square(square_x, square_y, square_side, color)
+        square.draw(canvas)
 
-# Rectangle
-rec_x = 0
-rec_y = 0
-rec_width = 50
-rec_height = 20
-color = (50,50,100)
-rectangle  = Rectangle(rec_x, rec_y, rec_width, rec_height, color)
-rectangle.draw(canvas)
+    if shape == "rectangle":
+        rec_x = int(input("Please provide starting x: "))
+        rec_y = int(input("Please provide starting y: "))
+        rec_width = int(input("Please give me the width length: "))
+        rec_height = int(input("Please give me the height length: "))
+        square_red = int(input("How much red (0-255)? "))
+        square_green = int(input("How much green (0-255)? "))
+        square_blue = int(input("How much blue (0-255)? "))
+        color = (square_red, square_green, square_blue)
+        rectangle = Rectangle(rec_x, rec_y, rec_width, rec_height, color)
+        rectangle.draw(canvas)
 
-
-# # User drawings
-# end_of_program = False
-# while end_of_program == False:
-#     shape = input ("Choose the shape (square/rectagle) or type quit to fnish drawing: ")
-#     if shape == "square":
-#         square_x = int(input("Please provide starting x: "))
-#         square_y = int(input("Please provide starting y: "))
-#         square_side = int(input("Please give me the side length: "))
-#         square_red = int(input("How much red (0-255)? "))
-#         square_green = int(input("How much green (0-255)? "))
-#         square_blue = int(input("How much blue (0-255)? "))
-#         color = (square_red, square_green, square_blue)
-#         square = Square(square_x, square_y, square_side, color)
-#         square.draw(canvas)
-
-#     if shape == "rectangle":
-#         pass
-
-#     if shape == "quit":
-#         end_of_program = True
+    if shape == "quit":
+        end_of_program = True
 
 # Saving the image
 img = Image.fromarray(canvas.img_array, 'RGB')
