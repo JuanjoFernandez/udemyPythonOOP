@@ -10,20 +10,22 @@ class Square:
         self.color = color
     
     def draw(self, canvas):
-        
-        pass
+        canvas.img_array[self.x: self.x+self.side+1,
+        self.y:self.y+self.side+1] = self.color
+
 
 class Rectangle:
 
-    def __init__(self, x, y, side, color):
+    def __init__(self, x, y, width, height, color):
         self.x = x
         self.y = y
-        self.side = side
+        self.width = width
+        self.height = height
         self.color = color
     
     def draw(self, canvas):
-    
-        pass
+        canvas.img_array[self.x: self.x+self.height+1,
+        self.y:self.y+self.width+1] = self.color
 
 
 class Canvas:
@@ -64,7 +66,18 @@ square_x = 50
 square_y = 50
 square_side = 20
 color = (100,150,200)
+square = Square(square_x, square_y, square_side, color)
 square.draw(canvas)
+
+# Rectangle
+rec_x = 0
+rec_y = 0
+rec_width = 50
+rec_height = 20
+color = (50,50,100)
+rectangle  = Rectangle(rec_x, rec_y, rec_width, rec_height, color)
+rectangle.draw(canvas)
+
 
 # # User drawings
 # end_of_program = False
@@ -87,9 +100,6 @@ square.draw(canvas)
 #     if shape == "quit":
 #         end_of_program = True
 
-
-
-
 # Saving the image
-img = Image.fromarray(canvas.make(), 'RGB')
+img = Image.fromarray(canvas.img_array, 'RGB')
 img.save('math_paint.png')
