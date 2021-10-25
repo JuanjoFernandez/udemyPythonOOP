@@ -10,7 +10,7 @@ class Square:
         self.color = color
     
     def draw(self, canvas):
-
+        
         pass
 
 class Rectangle:
@@ -32,17 +32,19 @@ class Canvas:
         self.width = width
         self.height = height
         self.color = color
-    
-    def make(self):
-        image_array = np.zeros((self.width, self.height, 3), dtype = np.uint8)
+
+        self.img_array = np.zeros((self.width, self.height, 3), dtype = np.uint8)
         if self.color == "white":
-            image_array[:] = [255, 255, 255]
-        return image_array
+            self.img_array[:] = [255, 255, 255]
+
+    def make(self):
+        pass 
+
 
 # Test inputs
 width = 100
 height = 100
-color = "black"
+color = "white"
 
 # # Creating the canvas
 # width = int(input("What's the width of the canvas in pixels?: "))
@@ -54,8 +56,39 @@ color = "black"
 #     if color == "white" or color == "black":
 #         valid_color = True
 
-
 canvas = Canvas(width, height, color)
+
+# Test inputs
+# Square
+square_x = 50
+square_y = 50
+square_side = 20
+color = (100,150,200)
+square.draw(canvas)
+
+# # User drawings
+# end_of_program = False
+# while end_of_program == False:
+#     shape = input ("Choose the shape (square/rectagle) or type quit to fnish drawing: ")
+#     if shape == "square":
+#         square_x = int(input("Please provide starting x: "))
+#         square_y = int(input("Please provide starting y: "))
+#         square_side = int(input("Please give me the side length: "))
+#         square_red = int(input("How much red (0-255)? "))
+#         square_green = int(input("How much green (0-255)? "))
+#         square_blue = int(input("How much blue (0-255)? "))
+#         color = (square_red, square_green, square_blue)
+#         square = Square(square_x, square_y, square_side, color)
+#         square.draw(canvas)
+
+#     if shape == "rectangle":
+#         pass
+
+#     if shape == "quit":
+#         end_of_program = True
+
+
+
 
 # Saving the image
 img = Image.fromarray(canvas.make(), 'RGB')
