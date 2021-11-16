@@ -5,8 +5,8 @@ from selectorlib import Extractor
 class Temperature:
     """Scraps city temperature from timeanddate.com"""
     def __init__(self, country, city):
-        self.country = country
-        self.city = city
+        self.country = country.replace(" ", "-")
+        self.city = city.replace(" ", "-")
 
     def get(self):
         url = f'https://www.timeanddate.com/weather/{self.country}/{self.city}'
