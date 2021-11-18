@@ -12,21 +12,30 @@ class NewsFeed:
         self.language = language
     
     def get(self):
-        # API call
-        url = f'https://newsapi.org/v2/everything?' \
-            f'qInTitle={self.interest}&' \
-            f'from={self.from_date}&to={self.to_date}&' \
-            f'language={self.language}&'
-        request = requests.get(url + 'apiKey=' + api_key)
-        response = request.json()
-        articles = response['articles']
+        url = self._build_url()
+        
+        articles = self._get_articles(url)
 
         email_body = ''
-
         for article in articles:
             email_body = email_body +  article['title'] + '\n' + article['url'] + '\n\n'
 
         return(email_body)
+
+    def _get_articles(self, url):
+        request = requests.get(url)
+        response = request.json()
+        articles = response['articles']
+        return articles
+    
+    def _build_url(self):
+        url = f'https://newsapi.org/v2/everything?' \
+              f'qInTitle={self.interest}&' \
+              f'from={self.from_date}&to={self.to_date}&' \
+              f'language={self.language}&'\
+              f'apiKey={api_key}'
+        return url
+
 
 
 
