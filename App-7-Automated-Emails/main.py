@@ -1,40 +1,17 @@
-from config import api_key
-import requests
+import yagmail
+from config import e_mail_user, e_mail_password
 import pandas as pd
-from pprint import pprint
-
-class NewsFeed:
-    """Representing multiple news and links as a single string"""
-
-    base_url = 'https://newsapi.org/v2/everything?'
-    def __init__(self, interest, from_date, to_date, language):
-        self.interest = interest
-        self.from_date = from_date
-        self.to_date = to_date
-        self.language = language
-    
-    def get(self):
-        # API call
-        url = f'https://newsapi.org/v2/everything?' \
-            f'qInTitle={self.interest}&' \
-            f'from={self.from_date}&to={self.to_date}&' \
-            f'language={self.language}&'
-        request = requests.get(url + 'apiKey=' + api_key)
-        response = request.json()
-        articles = response['articles']
-
-        email_body = ''
-
-        for article in articles:
-            email_body = email_body +  article['title'] + '\n' + article['url'] + '\n\n'
-
-        print(email_body)
+from news import NewsFeed
 
 people = pd.read_excel('people.xlsx', usecols="A:D")
 people.dropna(inplace=True)
 
-news_feed = NewsFeed('nasa', '2021-11-12', '2021-11-12', 'en').get()
-
-
-
-
+for index, row in people.iterrows():
+    news_feed = NewsFeed(interest=row['interest'],
+                         from_date='2021-11-18', 
+                         to_date='2021-11-18')
+    
+    email = yagmail.SMTP(user=e_mail_user, password = e_mail_password)
+    email.send(to=row['email'], 
+            subject=f"Your {row['interest']} news for today!",
+            contents=f"Hi {row['name']}\n See what's on about {row['interest']} today.\n{news_feed.get()}JJ",)
