@@ -6,7 +6,7 @@ def home():
     wp = jp.WebPage()
     div = jp.Div(a=wp, classes="bg-gray-200 h-screen")
 
-    div1 = jp.Div(a=div, classes="grid grid-cols-3 gap-4")
+    div1 = jp.Div(a=div, classes="grid grid-cols-3 gap-4 p-4")
     jp.Input(a=div1, placeholder="Enter first value", classes="form-input")
     jp.Input(a=div1, placeholder="Enter second value", classes="form-input")
     jp.Div(a=div1, text="Result goes here...", classes="text-gray-600")
