@@ -18,12 +18,20 @@ def home():
               classes="border border-blue-500 m-2 py-1 px-4 rounded "
                       "text-blue-600 hover:bg-blue-900 hover:text-white")
 
-    jp.Div(a=div2, text="I am a cool interactive div!")
+    jp.Div(a=div2, text="I am a cool interactive div!", mouseenter=mouse_enter,
+           mouseleave = mouse_leave, 
+           classes = "hover:bg-grey-900")
 
     return wp
 
 def sum_up(widget, msg):
     sum = float(widget.in1.value) + float(widget.in2.value)
     widget.d.text = sum
+
+def mouse_enter(widget, msg):
+    widget.text = "A mouse entered the house!"
+
+def mouse_leave(widget, msg):
+    widget.text = "The mouse left the house!"
 
 jp.justpy()
