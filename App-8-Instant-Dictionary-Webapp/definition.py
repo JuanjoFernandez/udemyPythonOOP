@@ -10,6 +10,4 @@ class Definition:
 
 
 d = Definition(term='sun')
-
-print(d.get())
         
