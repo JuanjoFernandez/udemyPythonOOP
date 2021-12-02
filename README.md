@@ -26,3 +26,8 @@
 - This app requires an API key from [news.api.org](https://newsapi.org/)
 - It also requires a Gmail account
 - For testing purposes the e-mail addresses are temporary ones
+
+## App-8 Instant Dictionary Webapp
+- An app that instantly displays the definition of a word
+- Pulls the definition from a csv file
+- Uses Justpy to build a Qasar webpage
