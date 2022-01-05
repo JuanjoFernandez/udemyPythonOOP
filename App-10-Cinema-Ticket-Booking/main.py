@@ -46,7 +46,13 @@ class Seat:
             return False
 
     def occupy(self):
-
+        connection = sqlite3.connect('cinema.db')
+        query = f"UPDATE Seat SET taken=1 WHERE seat_id == '{self.seat_id}'"
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+        connection.close()
+        
         return
 
 
@@ -68,7 +74,7 @@ class Card:
             balance = record[0][4]
             new_balance = balance - int(price)
             balance = new_balance
-            query = f"UPDATE Card SET balance={new_balance};"
+            query = f"UPDATE Card SET balance={new_balance} WHERE number == '{self.card_number}';"
             
         else: 
             query = "INSERT INTO Card VALUES (?, ?, ?, ?, ?)"
@@ -88,7 +94,24 @@ class Ticket:
         self.seat_number = seat_number
         pass
 
-    def to_pdf(self, path):
+    def to_pdf(self, path):       
+        # Generating the ticket
+        pdf = FPDF(orientation='P', unit='pt', format='A4')
+        pdf.add_page()
+
+        # Title
+        pdf.set_font(family='Times', size=24, style='B')
+        pdf.cell(w=0, h=80, txt='The CiNe Cinema Complex', border=1, align='C', ln=1)
+
+        # Insert Ticket Info
+        pdf.set_font(family="Times", size=14, style='B')
+        pdf.cell(w=100, h=40, txt='Ticket:', border=0)
+        pdf.cell(w=150, h=40, txt= self.ticket_id, border=0, ln=1)
+        pdf.cell(w=150, h=40, txt= self.seat_number, border=0, ln=1)
+        pdf.cell(w=150, h=40, txt= self.user, border=0, ln=1)
+        pdf.cell(w=150, h=40, txt= self.price, border=0, ln=1)
+
+        pdf.output(path)
 
         return
 
@@ -136,6 +159,7 @@ charge = credit_card.validate(price)
 print ("Transaction succesfull, generating ticket, enjoy your movie")
 
 # Generating ticket
+seat.occupy()
 ticket = Ticket(name, price, seat.seat_id)
 ticket.to_pdf("ticket.pdf")
 
