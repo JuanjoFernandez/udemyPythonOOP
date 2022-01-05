@@ -71,10 +71,11 @@ class Card:
             query = f"UPDATE Card SET balance={new_balance};"
             
         else: 
-            query = f"INSERT INTO Card VALUES ('{self.type}', '{self.card_number}', '{self.card_cvc}', '{self.holder}', '{1000}');"
-            cursor.execute(query)
+            query = "INSERT INTO Card VALUES (?, ?, ?, ?, ?)"
+            cursor.execute(query, [self.type, self.card_number, self.card_cvc, self.holder, 1000])
             balance = 1000
         
+        connection.commit()
         connection.close()
         return balance
 
