@@ -67,7 +67,7 @@ class Card:
     def validate(self, price):
         connection = sqlite3.connect('banking.db')
         cursor = connection.cursor()
-        query = f"SELECT number FROM Card WHERE number == '{self.card_number}';"
+        query = f"SELECT * FROM Card WHERE number == '{self.card_number}';"
         exists = cursor.execute(query)
         record = exists.fetchall()
         if record:
@@ -107,13 +107,16 @@ class Ticket:
         pdf.set_font(family="Times", size=14, style='B')
         pdf.cell(w=100, h=40, txt='Ticket:', border=0)
         pdf.cell(w=150, h=40, txt= self.ticket_id, border=0, ln=1)
+        pdf.cell(w=100, h=40, txt='Seat:', border=0)
         pdf.cell(w=150, h=40, txt= self.seat_number, border=0, ln=1)
+        pdf.cell(w=100, h=40, txt='Name:', border=0)
         pdf.cell(w=150, h=40, txt= self.user, border=0, ln=1)
-        pdf.cell(w=150, h=40, txt= self.price, border=0, ln=1)
+        pdf.cell(w=100, h=40, txt='Price:', border=0)
+        pdf.cell(w=150, h=40, txt= str(self.price), border=0, ln=1)
 
         pdf.output(path)
-
-        return
+        
+        return "Ticket generated"
 
 # Get client name
 
@@ -161,6 +164,7 @@ print ("Transaction succesfull, generating ticket, enjoy your movie")
 # Generating ticket
 seat.occupy()
 ticket = Ticket(name, price, seat.seat_id)
-ticket.to_pdf("ticket.pdf")
+gen_ticket = ticket.to_pdf("ticket.pdf")
+print(gen_ticket)
 
 
