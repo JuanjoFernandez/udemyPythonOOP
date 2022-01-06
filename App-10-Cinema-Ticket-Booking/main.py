@@ -75,6 +75,7 @@ class Card:
             new_balance = balance - int(price)
             balance = new_balance
             query = f"UPDATE Card SET balance={new_balance} WHERE number == '{self.card_number}';"
+            cursor.execute(query)
             
         else: 
             query = "INSERT INTO Card VALUES (?, ?, ?, ?, ?)"
