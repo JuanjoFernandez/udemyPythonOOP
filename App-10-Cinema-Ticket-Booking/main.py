@@ -72,7 +72,7 @@ class Card:
         record = exists.fetchall()
         if record:
             balance = record[0][4]
-            new_balance = balance - int(price)
+            new_balance = balance - price
             balance = new_balance
             query = f"UPDATE Card SET balance={new_balance} WHERE number == '{self.card_number}';"
             cursor.execute(query)
@@ -121,28 +121,21 @@ class Ticket:
 
 # Get client name
 
-name = 'John'
-# name = input("Welcome to the cinema booking app. What's your name?:")
+name = input("Welcome to the cinema booking app. What's your name?:")
 
 # Get seat_id and validate
 seat_valid = False
 while not seat_valid:
-    
-    # seat = Seat(input("Please choose your seat (A1, A2, A3, B1, B2, B3):"))
-    seat = Seat('A1')
-
+    seat = Seat(input("Please choose your seat (A1, A2, A3, B1, B2, B3):"))
     seat_valid = seat.is_free()
 
 # Get all the credit card info
 valid_card = False
 while valid_card == False:
-    card_number = '1234123412341234'
-    card_cvc = '111'
-    card_holder = 'JOHN S. DOE'
     price = seat.get_price()
-    # card_number = input(f'Your seat {seat.seat_id} is available with a price of ${price} please enter your credit card number:')
-    # card_cvc = input('Please enter the csv number:')
-    # card_holder = input('Please enter the card holder name:')
+    card_number = input(f'Your seat {seat.seat_id} is available with a price of ${price} please enter your credit card number:')
+    card_cvc = input('Please enter the csv number:')
+    card_holder = input('Please enter the card holder name:')
 
     # Validate the credit card 
     if len(card_number) == 16 and card_number.isnumeric() and \
