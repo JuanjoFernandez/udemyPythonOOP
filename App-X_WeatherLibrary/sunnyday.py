@@ -1,9 +1,7 @@
-from config import API_key
 import requests
-from pprint import pprint
 
 class Weather:
-    """Creates a weather object gatting an apikey as input and either a city name or lat and lon coordinates.
+    """Creates a weather object gertting an apikey as input and either a city name or lat and lon coordinates.
 
     Package use example:
 
@@ -14,7 +12,7 @@ class Weather:
     >>> weather1 = Weather(apikey = "your API key", city = "Madrid")
 
     # Using latitude and longitude coordinates
-    >>> weahter2 = Weather(apikey = "your API key", lat = 41.1, lon = -4.1)
+    >>> weather2 = Weather(apikey = "your API key", lat = 41.1, lon = -4.1)
 
     # Get complete weather data for the next 12 hours:
     >>> weather1.next_12h()
@@ -53,6 +51,3 @@ class Weather:
             simple_data.append((time['dt_txt'], time['main']['temp'], time['weather'][0]['description']))
         
         return simple_data
-
-weather = Weather(apikey=API_key, city="Madrid", lat=4.1, lon=4.5)
-pprint(weather.next_12h_simplified())
