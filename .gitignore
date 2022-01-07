@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Sensitive files
-App-X_WeatherLibrary/config.py
+/App-X_WeatherLibrary/config.py
