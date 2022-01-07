@@ -16,6 +16,9 @@ class Weather:
             self.data = r.json()
         else:
             raise TypeError("provide either a city or lat and lon arguments")
+
+        if self.data['cod'] != '200':
+            raise ValueError(self.data['message'])
     
     def next_12h(self):
         return self.data['list'][:4]
