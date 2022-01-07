@@ -21,7 +21,11 @@ class Weather:
         return self.data['list'][:4]
 
     def next_12h_simplified(self):
-        pass
+        simple_data = []
+        for time in self.data['list'][:4]:
+            simple_data.append((time['dt_txt'], time['main']['temp'], time['weather'][0]['description']))
+        
+        return simple_data
 
 weather = Weather(apikey=API_key, city="Madrid", lat=4.1, lon=4.5)
-pprint(weather.next_12h())
+pprint(weather.next_12h_simplified())
