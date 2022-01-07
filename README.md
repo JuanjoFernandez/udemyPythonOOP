@@ -31,3 +31,13 @@
 - An app that instantly displays the definition of a word
 - Pulls the definition from a csv file
 - Uses Justpy to build a Qasar webpage
+
+## App-9 Instant Dictionary API
+- An API that serves as a dictionary
+
+## App-10 Cinema Ticket Booking
+- An automated booking app
+- Uses SQLite to connect to a database for seat availabilty and billing
+- Generates a PDF ticket
+
+## App-X Weather Library
